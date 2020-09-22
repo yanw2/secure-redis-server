@@ -1,0 +1,19 @@
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: redis-policy
+  namespace: default
+  labels:
+    target: app-a-1
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  rules:
+    - from:
+      - source:
+          namespaces: ["namespace-a"]
+      - to:
+          operation:
+            ports: ["6379"]
